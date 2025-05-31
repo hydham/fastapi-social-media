@@ -3,12 +3,10 @@ from .. import models, schemas, utils
 from sqlalchemy.orm import Session
 from ..database import get_db
 
-router = APIRouter()
+router = APIRouter(prefix="/users", tags=["User"])
 
 
-@router.post(
-    "/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut
-)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
 async def create_user(user: schemas.UserIn, db: Session = Depends(get_db)):
     # check email already exists
     email_exist = db.query(models.User).filter_by(email=user.email).first()

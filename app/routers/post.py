@@ -3,7 +3,7 @@ from .. import models, schemas
 from sqlalchemy.orm import Session
 from ..database import get_db
 
-router = APIRouter()
+router = APIRouter(prefix="/posts", tags=["Post"])
 
 
 @router.get("/", response_model=list[schemas.Post])
@@ -48,7 +48,7 @@ async def get_post(id: int, db: Session = Depends(get_db)):
     return post
 
 
-@router.delete("//{id}")
+@router.delete("/{id}")
 async def delete_post(id: int, db: Session = Depends(get_db)):
     # cursor.execute(""" DELETE FROM posts WHERE id = %s RETURNING * """, (id,))
     # post = cursor.fetchone()
@@ -67,7 +67,7 @@ async def delete_post(id: int, db: Session = Depends(get_db)):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.put("//{id}", response_model=schemas.Post)
+@router.put("/{id}", response_model=schemas.Post)
 async def update_post(
     id: int, update_data: schemas.PostUpdate, db: Session = Depends(get_db)
 ):

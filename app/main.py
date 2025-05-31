@@ -7,10 +7,6 @@ from . import models
 from contextlib import asynccontextmanager
 from .routers import post, user
 
-SECRET_KEY = "5ff03991ebc18f8182bf0181ba352259598bc9ecb4a7ab719e14b366f6564b0e"
-ALGORITH = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -18,10 +14,14 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(
+    lifespan=lifespan,
+    title="Social Media API",
+    description="Fastapi APIS for social media application",
+)
 
-app.include_router(router=post.router, prefix="/posts")
-app.include_router(router=user.router, prefix="/users")
+app.include_router(post.router)
+app.include_router(user.router)
 
 
 try:
