@@ -27,24 +27,6 @@ async def create_user(user: schemas.UserIn, db: Session = Depends(get_db)):
     return new_user
 
 
-@router.post("/login", response_model=schemas.UserOut)
-async def login(user_input: schemas.UserIn, db: Session = Depends(get_db)):
-    # get the user
-    user = db.query(models.User).filter_by(email=user_input.email).first()
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="No user exists"
-        )
-
-    hash = user.password
-    password_check = utils.verify_password(user_input.password, hash)
-    if not password_check:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Wrong password"
-        )
-    return user
-
-
 @router.get("/{id}", response_model=schemas.UserOut)
 async def get_user(id: int, db: Session = Depends(get_db)):
     user = db.query(models.User).filter_by(id=id).first()

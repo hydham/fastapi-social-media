@@ -5,7 +5,7 @@ from .database import get_db, engine
 from sqlalchemy.orm import Session
 from . import models
 from contextlib import asynccontextmanager
-from .routers import post, user
+from .routers import post, user, auth
 
 
 @asynccontextmanager
@@ -22,6 +22,7 @@ app = FastAPI(
 
 app.include_router(post.router)
 app.include_router(user.router)
+app.include_router(auth.router)
 
 
 try:
