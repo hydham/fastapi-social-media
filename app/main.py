@@ -1,11 +1,11 @@
-from fastapi import FastAPI, Depends
-import psycopg2
-from psycopg2.extras import RealDictCursor
-from .database import get_db, engine
-from sqlalchemy.orm import Session
-from . import models
 from contextlib import asynccontextmanager
-from .routers import post, user, auth
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from . import models
+from .database import engine
+from .routers import auth, post, user, vote
 
 
 @asynccontextmanager
@@ -20,34 +20,19 @@ app = FastAPI(
     description="Fastapi APIS for social media application",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
+app.include_router(vote.router)
 
-
-try:
-    conn = psycopg2.connect(
-        host="localhost",
-        database="fastapi",
-        user="postgres",
-        password="postgres",
-        port=5432,
-        cursor_factory=RealDictCursor,
-    )
-
-    cursor = conn.cursor()
-    print("Database connected")
-except Exception as error:
-    print("Database connection failed")
-    print("Error: ", error)
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/sqlalchemy")
-async def test_db(db: Session = Depends(get_db)):
-    db.query("")
-    return {"message": "success"}
+@app.get('/')
+def health_check():
+    return {"message": "hello world"}
