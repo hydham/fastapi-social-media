@@ -1,7 +1,0 @@
-{
-  "python.languageServer": "Pylance",
-  "editor.defaultFormatter": null,
-  "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff"
-  }
-}

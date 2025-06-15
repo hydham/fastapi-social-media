@@ -32,3 +32,4 @@ instance
 .mypy_cache
 .pytest_cache
 venv/
+.vscode/
