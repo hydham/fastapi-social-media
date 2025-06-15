@@ -40,7 +40,7 @@ class Post(PostBase):
     owner: UserOut
 
 class PostOut(BaseModel):
-    post: Post
+    Post: Post
     votes: int = 0
 
 class Token(BaseModel):
