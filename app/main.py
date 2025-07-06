@@ -10,7 +10,7 @@ from .routers import auth, post, user, vote
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    models.Base.metadata.create_all(bind=engine)
+    # models.Base.metadata.create_all(bind=engine)
     yield
 
 
@@ -23,7 +23,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -35,4 +35,4 @@ app.include_router(vote.router)
 
 @app.get('/')
 def health_check():
-    return {"message": "hello world"}
+    return {"message": "hello world"}   

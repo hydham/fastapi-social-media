@@ -20,11 +20,8 @@ def get_posts(
     # cursor.execute("""SELECT * FROM posts""")
     # posts = cursor.fetchall()
 
-    posts = db.query(models.Post).all()
 
     results = db.query(models.Post, func.count(models.Vote.post_id).label('votes')).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).all()
-
-    print(results)
 
     return results
 
