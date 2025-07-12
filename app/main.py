@@ -22,7 +22,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=['*'], 
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -35,4 +35,4 @@ app.include_router(vote.router)
 
 @app.get('/')
 def health_check():
-    return {"message": "hello world"}   
+    return {"message": "hello world!!!"}   
