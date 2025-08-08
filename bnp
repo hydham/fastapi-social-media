@@ -1,1 +1,17 @@
-Text.Select([cleaned_error_msg], {"a".."z","A".."Z","0".."9"," ", ".", ",", ":", ";", "!", "?", "-", "_", "/"})
+-- 1) one-time: create MV
+CREATE MATERIALIZED VIEW IF NOT EXISTS public.kpi_supplychain_rt AS
+SELECT
+  av.*,
+  mp.product_name AS marketplace_product_name,
+  eb.business_line
+FROM public.actions_view av
+LEFT JOIN capsule.marketplace_product mp
+  ON av.marketplace_productid = mp.product_id
+LEFT JOIN capsule.ecosystem_businessline eb
+  ON av.ecosystem = eb.ecosystem
+-- limit the window so the MV stays small & "live"
+WHERE av.datetime >= NOW() - INTERVAL '24 hours';
+
+-- 2) helpful indexes for filters
+CREATE INDEX IF NOT EXISTS idx_kpi_rt_datetime ON public.kpi_supplychain_rt (datetime);
+CREATE INDEX IF NOT EXISTS idx_kpi_rt_status   ON public.kpi_supplychain_rt (status);
