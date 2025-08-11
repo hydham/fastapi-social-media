@@ -1,12 +1,11 @@
-SELECT c.table_schema, c.table_name,
-       STRING_AGG(c.column_name, ', ' ORDER BY c.column_name) AS cols
-FROM information_schema.columns c
-WHERE (c.column_name ILIKE '%sub_id%'
-    OR c.column_name ILIKE '%uid%'
-    OR c.column_name ILIKE '%status%'
-    OR c.column_name ILIKE '%error_msg%'
-    OR c.column_name ILIKE '%error_type%'
-    OR c.column_name ILIKE '%failed_job%'
-    OR c.column_name ILIKE '%failed_task%')
-GROUP BY 1,2
+SELECT table_schema, table_name
+FROM information_schema.tables
+WHERE table_type IN ('BASE TABLE','VIEW')
+  AND (
+       table_name ILIKE '%subscription%'
+    OR table_name ILIKE '%event%'
+    OR table_name ILIKE '%task%'
+    OR table_name ILIKE '%error%'
+    OR table_name ILIKE '%failure%'
+  )
 ORDER BY 1,2;
