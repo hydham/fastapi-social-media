@@ -1,11 +1,5 @@
-SELECT table_schema, table_name
-FROM information_schema.tables
-WHERE table_type IN ('BASE TABLE','VIEW')
-  AND (
-       table_name ILIKE '%subscription%'
-    OR table_name ILIKE '%event%'
-    OR table_name ILIKE '%task%'
-    OR table_name ILIKE '%error%'
-    OR table_name ILIKE '%failure%'
-  )
-ORDER BY 1,2;
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_schema = 'public'
+  AND table_name = 'subscription'
+ORDER BY ordinal_position;
