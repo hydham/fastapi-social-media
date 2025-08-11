@@ -1,5 +1,12 @@
-SELECT column_name, data_type
+SELECT table_schema, table_name, column_name
 FROM information_schema.columns
-WHERE table_schema = 'public'
-  AND table_name = 'subscription'
-ORDER BY ordinal_position;
+WHERE table_schema NOT IN ('pg_catalog','information_schema')
+  AND (
+       column_name ILIKE '%error%'
+    OR column_name ILIKE 'fail%'
+    OR column_name ILIKE '%failed%'
+    OR column_name ILIKE '%reason%'
+    OR column_name ILIKE '%job%'
+    OR column_name ILIKE '%task%'
+  )
+ORDER BY 1,2,3;
