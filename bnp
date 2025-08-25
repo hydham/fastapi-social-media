@@ -1,12 +1,90 @@
-SELECT table_schema, table_name, column_name
-FROM information_schema.columns
-WHERE table_schema NOT IN ('pg_catalog','information_schema')
-  AND (
-       column_name ILIKE '%error%'
-    OR column_name ILIKE 'fail%'
-    OR column_name ILIKE '%failed%'
-    OR column_name ILIKE '%reason%'
-    OR column_name ILIKE '%job%'
-    OR column_name ILIKE '%task%'
-  )
-ORDER BY 1,2,3;
+	1	How authentication is implemented in Flask?
+	2	Mechanisms to improve REST API performance
+	3	Can the DEL HTTP method be used to insert data? 
+	4	How Flask ORM performance is improved
+	5	Why is ORM used in Flask
+	6	Difference between package and module
+	7	Linked List vs Array
+	8	Stack vs Queue
+	9	What is a Class variable? How to update a class variable
+	10	What is Class method
+SQL
+	1	Indexing 
+	2	Primary Key, Foreign Key, Unique Key difference
+	3	How to scale the database
+	4	What is partitioning a database
+React
+	1	How are hooks different from lifecycle methods?
+	2	Is class method preferred over functional in React? Why did they update to Functional
+	3	In Javascript, why is class preferred over functions? Why did they update to Class?
+	4	Middlewares Life Cycle in Redux
+
+
+
+
+Movate Interview:
+	•	Candidate must be an expert in Python/ React.
+	•	· Familiarity with ORM (Object Relational Mapper) libraries.
+	•	· Able to integrate multiple data sources and databases into one system.
+	•	· Understanding of the threading limitations of Python and multi-process architecture.
+	•	· Good understanding of server-side templating languages.
+	•	· Basic understanding of front-end technologies such as JavaScript, HTML 5 and CSS3.
+	•	· Knowledge of user authentication and authorization between multiple systems, servers and environments.
+	•	· Understanding of fundamental design principles behind a scalable application.
+	•	· Familiarity with event-driven programming in Python.
+	•	· Strong unit test and debugging skills.
+	•	· Proficient understanding of code versioning tools.
+	•	· Responsible for the delivery of technical projects/tasks.
+
+
+
+
+Yitro Interview
+	•	React 
+	•	Python
+	•	Dockers & Kubernetes Advanced Python Coding
+	•	Leetcode
+
+
+
+Wipro Python
+	•	Decorator
+	•	What is the use of wrapper in decorator
+	•	Create a function to return the most repeated character and count for a string
+	•	Create a list of numbers and return the multiplication of it by 2 using list comprehension
+	•	Create a dictionary using a list of numbers using list comprehension in one line
+	•	Method Overloading & Method Overriding
+	•	Create a static method. What happens if I remove @staticmethod decorator
+	•	Add __ to a static method and then call the method. 
+
+
+
+BNP Paribas Python
+	•	Lambda function 
+	•	Dependency injection in fastapi
+	•	Write a class and define a method in the class
+	•	Given an XML code, extract the content or value inside the <type> tage
+	•	Write content in a file using python and close the file.
+	•	What happens if you forget to close the db connectiop
+	•	Advantage of fastapi over flask & django
+	•	Using Request module, how can you download file from internet and saving the file
+	•	Difference between list and tuple
+	•	Difference between list and array
+	•	How to remove duplicates in a list. Write code
+
+
+
+BNP Paribas Devops
+	•	How do you start a service like Apache if it’s inactive
+	•	Difference between Docker cp and docker copy
+	•	How do you fix running docker containers
+	•	Write a sample Jenkins pipeline (declarative) script that send an email only if the job fails
+	•	How do you write Docker commands in a script
+	•	Dependency in the context of Docker
+	•	Difference git and github
+	•	What commands are used to fetch running ports on a server (windows or linux)
+	•	How do you delete files older than 30 days in a folder in linux
+	•	How do you configure a webhook from bitbucket to jenkins. Give steps
+	•	How do you check if the connection between servers is open when there’s a firewall
+	•	How do you identify if a given port is in a listening state or being used by some service on windows
+
